@@ -5,12 +5,12 @@ with open('README.md', encoding='utf-8') as f:
     long_description = f.read()
 
 setuptools.setup(
-    name="PySideSix-Frameless-Window",
+    name="QtFrame",
     version="0.3.12",
     keywords="pyside6 frameless",
     author="zhiyiYo",
     author_email="shokokawaii@outlook.com",
-    description="A cross-platform frameless window based on pyside6, support Win32, Linux and macOS.",
+    description="A cross-platform frameless window based on PySide6, supports Win32, Linux and macOS.",
     long_description=long_description,
     long_description_content_type='text/markdown',
     license="LGPLv3",
