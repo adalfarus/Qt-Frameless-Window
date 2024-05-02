@@ -38,7 +38,7 @@
 ## Install
 To install use pip:
 ```shell
-pip install PySideSix-Frameless-Window
+pip install QtFrame
 ```
 Or clone the repo:
 ```shell
@@ -55,16 +55,15 @@ python setup.py install
 
 
 ## Usage
-To use the frameless window, you only need to inherit `FramelessWindow` or `FramelessMainWindow`. Here is a minimal example:
+To use the frameless window, you only need to inherit `QFramelessWindow` or `FramelessMainWindow`. Here is a minimal example:
 ```python
 import sys
 
 from PySide6.QtWidgets import QApplication
-from qframelesswindow import FramelessWindow
+from QtFrame import QFramelessWindow
 
 
-class Window(FramelessWindow):
-
+class Window(QFramelessWindow):
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         self.setWindowTitle("PySide6-Frameless-Window")
