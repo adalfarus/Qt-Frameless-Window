@@ -23,22 +23,21 @@ from PySide6.QtWidgets import QDialog, QMainWindow
 from .titlebar import TitleBar, TitleBarButton, SvgTitleBarButton, StandardTitleBar, TitleBarBase
 
 if sys.platform == "win32":
-    from .windows import AcrylicWindow
-    from .windows import WindowsFramelessWindow as FramelessWindow
-    from .windows import WindowsFramelessMainWindow as FramelessMainWindow
-    from .windows import WindowsFramelessDialog as FramelessDialog
-    from .windows import WindowsWindowEffect as WindowEffect
+    from .windows import AcrylicWindow as QAcrylicWindow
+    from .windows import WindowsFramelessWindow as QFramelessWindow
+    from .windows import WindowsFramelessMainWindow as QFramelessMainWindow
+    from .windows import WindowsFramelessDialog as QFramelessDialog
+    from .windows import WindowsWindowEffect as QWindowEffect
 elif sys.platform == "darwin":
-    from .mac import AcrylicWindow
-    from .mac import MacFramelessWindow as FramelessWindow
-    from .mac import MacFramelessMainWindow as FramelessMainWindow
-    from .mac import MacFramelessDialog as FramelessDialog
-    from .mac import MacWindowEffect as WindowEffect
+    from .mac import AcrylicWindow as QAcrylicWindow
+    from .mac import MacFramelessWindow as QFramelessWindow
+    from .mac import MacFramelessMainWindow as QFramelessMainWindow
+    from .mac import MacFramelessDialog as QFramelessDialog
+    from .mac import MacWindowEffect as QWindowEffect
 else:
-    from .linux import LinuxFramelessWindow as FramelessWindow
-    from .linux import LinuxFramelessMainWindow as FramelessMainWindow
-    from .linux import LinuxFramelessDialog as FramelessDialog
-    from .linux import LinuxWindowEffect as WindowEffect
+    from .linux import LinuxFramelessWindow as QFramelessWindow
+    from .linux import LinuxFramelessMainWindow as QFramelessMainWindow
+    from .linux import LinuxFramelessDialog as QFramelessDialog
+    from .linux import LinuxWindowEffect as QWindowEffect
 
-    AcrylicWindow = FramelessWindow
-
+    QAcrylicWindow = QFramelessWindow
