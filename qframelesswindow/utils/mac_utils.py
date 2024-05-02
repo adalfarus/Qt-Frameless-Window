@@ -3,12 +3,12 @@ from ctypes import c_void_p
 
 import Cocoa
 import objc
-from PyQt5.QtCore import QT_VERSION_STR
-from PyQt5.QtWidgets import QWidget
+from PySide6.QtCore import qVersion
+from PySide6.QtWidgets import QWidget
 from Quartz.CoreGraphics import (CGEventCreateMouseEvent,
                                  kCGEventLeftMouseDown, kCGMouseButtonLeft)
 
-QT_VERSION = tuple(int(v) for v in QT_VERSION_STR.split('.'))
+QT_VERSION = tuple(int(v) for v in qVersion().split('.'))
 
 
 class MacMoveResize:

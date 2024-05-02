@@ -2,10 +2,10 @@
   <img width="15%" align="center" src="https://raw.githubusercontent.com/zhiyiYo/PyQt-Frameless-Window/master/screenshot/logo.png" alt="logo">
 </p>
   <h1 align="center">
-  PyQt-Frameless-Window
+  PySide6-Frameless-Window
 </h1>
 <p align="center">
-  A cross-platform frameless window based on PyQt5
+  A cross-platform frameless window based on PySide6
 </p>
 
 <p align="center">
@@ -14,16 +14,15 @@
   </a>
 
   <a style="text-decoration:none">
-    <img src="https://static.pepy.tech/personalized-badge/pyqt5-frameless-window?period=total&units=international_system&left_color=grey&right_color=brightgreen&left_text=Downloads" alt="Download"/>
+    <img src="https://static.pepy.tech/personalized-badge/pysidesix_frameless_window?period=total&units=international_system&left_color=grey&right_color=brightgreen&left_text=Downloads" alt="Download"/>
   </a>
 
   <a style="text-decoration:none">
-    <img src="https://img.shields.io/badge/License-GPLv3-blue?color=#4ec820" alt="GPLv3"/>
+    <img src="https://img.shields.io/badge/License-LGPLv3-blue?color=#4ec820" alt="LGPLv3"/>
   </a>
 </p>
 
 ![Cover](https://raw.githubusercontent.com/zhiyiYo/PyQt-Frameless-Window/master/screenshot/cover.jpg)
-
 
 ## Features
 * Moving
@@ -39,11 +38,11 @@
 ## Install
 To install use pip:
 ```shell
-pip install PyQt5-Frameless-Window
+pip install PySideSix-Frameless-Window
 ```
 Or clone the repo:
 ```shell
-git clone https://github.com/zhiyiYo/PyQt-Frameless-Window.git
+git clone -b PySide6 https://github.com/zhiyiYo/PyQt-Frameless-Window.git
 python setup.py install
 ```
 
@@ -52,7 +51,6 @@ python setup.py install
 | Platform | Requirement |
 | :------: | :---------: |
 |  Win32   |   pywin32   |
-|  Linux   |   xcffib    |
 |  MacOS   |   pyobjc    |
 
 
@@ -61,7 +59,7 @@ To use the frameless window, you only need to inherit `FramelessWindow` or `Fram
 ```python
 import sys
 
-from PyQt5.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 from qframelesswindow import FramelessWindow
 
 
@@ -69,7 +67,7 @@ class Window(FramelessWindow):
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
-        self.setWindowTitle("PyQt-Frameless-Window")
+        self.setWindowTitle("PySide6-Frameless-Window")
         self.titleBar.raise_()
 
 
@@ -77,9 +75,9 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     demo = Window()
     demo.show()
-    sys.exit(app.exec_())
+    app.exec()
 ```
-For more complex requirements, see [demo.py](https://github.com/zhiyiYo/PyQt-Frameless-Window/blob/master/examples/demo.py) and [main_window.py](https://github.com/zhiyiYo/PyQt-Frameless-Window/blob/master/examples/main_window.py).
+For more complex requirements, see [demo.py](https://github.com/zhiyiYo/PyQt-Frameless-Window/blob/PySide6/examples/demo.py) and [main_window.py](https://github.com/zhiyiYo/PyQt-Frameless-Window/blob/PySide6/examples/main_window.py).
 
 ## Examples
 * Normal frameless window
@@ -89,11 +87,10 @@ For more complex requirements, see [demo.py](https://github.com/zhiyiYo/PyQt-Fra
 
 
 ## Document
-Want to know more about PyQt-Frameless-Window? Please read the [help document](https://pyqt-frameless-window.readthedocs.io/) 👈
-
+Want to know more about PySide6-Frameless-Window? Please read the [help document](https://pyqt-frameless-window.readthedocs.io/) 👈
 
 ## Notes
-1. `FramelessWindow` provides a default custom title bar. If you don't like it, just rewrite it as [demo.py](https://github.com/zhiyiYo/PyQt-Frameless-Window/blob/master/examples/demo.py) does.
+1. `FramelessWindow` provides a default custom title bar. If you don't like it, just rewrite it as [demo.py](https://github.com/zhiyiYo/PyQt-Frameless-Window/blob/PySide6/examples/demo.py) does.
 
 2. Moving the acrylic window on Win10 may get stuck. At present, there is no good solution. Maybe you can disable the acrylic effect when moving the window, but I haven't done this in the source code.
 3. Snap layout is not enabled by default. See [#56](https://github.com/zhiyiYo/PyQt-Frameless-Window/issues/56) to learn how to enable it.
@@ -103,10 +100,8 @@ Want to know more about PyQt-Frameless-Window? Please read the [help document](h
 
    see my answer on [stackoverflow](https://stackoverflow.com/questions/58612306/how-to-fix-importerror-dll-load-failed-while-importing-win32api/72488468#72488468) or my [blog](https://www.cnblogs.com/zhiyiYo/p/16340429.html) for the solution.
 
-5. If you are using PySide2, PySide6 or PyQt6, you can download the code in [PySide2](https://github.com/zhiyiYo/PyQt-Frameless-Window/tree/Pyside2), [PySide6](https://github.com/zhiyiYo/PyQt-Frameless-Window/tree/PySide6) or [PyQt6](https://github.com/zhiyiYo/PyQt-Frameless-Window/tree/PyQt6) branch.
+5. If you are using PySide2, PyQt5 or PyQt6, you can download the code in [PySide2](https://github.com/zhiyiYo/PyQt-Frameless-Window/tree/Pyside2), [PyQt5](https://github.com/zhiyiYo/PyQt-Frameless-Window) or [PyQt6](https://github.com/zhiyiYo/PyQt-Frameless-Window/tree/PyQt6) branch.
 
-## Support
-If this project helps you a lot and you want to support the development and maintenance of this project, feel free to sponsor me via [爱发电](https://afdian.net/a/zhiyiYo) or [ko-fi](https://ko-fi.com/zhiyiYo). Your support is highly appreciated 🥰
 
 ## See Also
 Here are some projects that use PyQt-Frameless-Window:
@@ -120,6 +115,6 @@ Here are some projects that use PyQt-Frameless-Window:
 * [**libxcb**: Basic Graphics Programming With The XCB Library](https://www.x.org/releases/X11R7.5/doc/libxcb/tutorial)
 
 ## License
-PyQt-Frameless-Window is licensed under [GPLv3](./LICENSE).
+PySide6-Frameless-Window is licensed under [LGPLv3](./LICENSE).
 
 Copyright © 2021 by zhiyiYo.

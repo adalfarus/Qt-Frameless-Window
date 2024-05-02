@@ -1,9 +1,9 @@
 # coding: utf-8
 import sys
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtWebEngineWidgets import QWebEngineView
-from qframelesswindow import AcrylicWindow, FramelessWindow
+from PySide6.QtCore import Qt
+from PySide6.QtWebEngineWidgets import QWebEngineView
+from qframelesswindow import AcrylicWindow, FramelessWindow, FramelessMainWindow, FramelessDialog
 
 
 class FramelessWebEngineView(QWebEngineView):
@@ -16,5 +16,5 @@ class FramelessWebEngineView(QWebEngineView):
         super().__init__(parent=parent)
         self.setHtml("")
 
-        if isinstance(self.window(), FramelessWindow):
+        if isinstance(self.window(), (FramelessWindow, FramelessMainWindow, FramelessDialog)):
             self.window().updateFrameless()

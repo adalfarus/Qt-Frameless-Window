@@ -8,10 +8,11 @@
 # 忽略python缓存文件
 */__pycache__
 *.py[cod]
+.DS_Store
 
 # 忽略测试文件
 test.py
 
 dist
 build
-PyQt5_Frameless_Window.egg-info
+*.egg-info

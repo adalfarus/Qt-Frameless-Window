@@ -8,9 +8,13 @@ import win32api
 import win32con
 import win32gui
 import win32print
-from PyQt5.QtCore import QOperatingSystemVersion
-from PyQt5.QtGui import QGuiApplication
-from win32comext.shell import shellcon
+from PySide6.QtCore import QOperatingSystemVersion, QVersionNumber
+from PySide6.QtGui import QGuiApplication
+
+
+ABM_GETSTATE = 4
+ABS_AUTOHIDE = 1
+ABM_GETTASKBARPOS = 5
 
 
 def isMaximized(hWnd):
@@ -161,30 +165,22 @@ def findWindow(hWnd):
             return window
 
 
-def isGreaterEqualVersion(version):
-    """ determine if the windows version ≥ the specifics version
-
-    Parameters
-    ----------
-    version: QOperatingSystemVersion
-        windows version
-    """
-    return QOperatingSystemVersion.current() >= version
-
-
 def isGreaterEqualWin8_1():
     """ determine if the windows version ≥ Win8.1 """
-    return isGreaterEqualVersion(QOperatingSystemVersion.Windows8_1)
+    cv = QOperatingSystemVersion.current()
+    cv = QVersionNumber(cv.majorVersion(), cv.minorVersion(), cv.microVersion())
+    return cv >= QVersionNumber(8, 1, 0)
 
 
 def isGreaterEqualWin10():
     """ determine if the windows version ≥ Win10 """
-    return isGreaterEqualVersion(QOperatingSystemVersion.Windows10)
+    cv = QOperatingSystemVersion.current()
+    return sys.platform == "win32" and cv.majorVersion() >= 10
 
 
 def isGreaterEqualWin11():
-    """ determine if the windows version ≥ Win10 """
-    return isGreaterEqualVersion(QOperatingSystemVersion.Windows10) and sys.getwindowsversion().build >= 22000
+    """ determine if the windows version ≥ Win11 """
+    return isGreaterEqualWin10() and sys.getwindowsversion().build >= 22000
 
 
 def isWin7():
@@ -236,10 +232,9 @@ class Taskbar:
         """ detect whether the taskbar is hidden automatically """
         appbarData = APPBARDATA(sizeof(APPBARDATA), 0,
                                 0, 0, RECT(0, 0, 0, 0), 0)
-        taskbarState = windll.shell32.SHAppBarMessage(
-            shellcon.ABM_GETSTATE, byref(appbarData))
+        taskbarState = windll.shell32.SHAppBarMessage(ABM_GETSTATE, byref(appbarData))
 
-        return taskbarState == shellcon.ABS_AUTOHIDE
+        return taskbarState == ABS_AUTOHIDE
 
     @classmethod
     def getPosition(cls, hWnd):
@@ -280,15 +275,14 @@ class Taskbar:
                 return cls.NO_POSITION
 
             if taskbarMonitor == windowMonitor:
-                windll.shell32.SHAppBarMessage(
-                    shellcon.ABM_GETTASKBARPOS, byref(appbarData))
+                windll.shell32.SHAppBarMessage(ABM_GETTASKBARPOS, byref(appbarData))
                 return appbarData.uEdge
 
         return cls.NO_POSITION
 
 
 class WindowsMoveResize:
-    """ Tool class for moving and resizing Mac OS window """
+    """ Tool class for moving and resizing Windows window """
 
     @staticmethod
     def startSystemMove(window, globalPos):

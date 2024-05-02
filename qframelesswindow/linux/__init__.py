@@ -1,20 +1,21 @@
 # coding:utf-8
-from PyQt5.QtCore import QCoreApplication, QEvent, Qt
-from PyQt5.QtGui import QMouseEvent
-from PyQt5.QtWidgets import QWidget
+from PySide6.QtCore import QCoreApplication, QEvent, Qt
+from PySide6.QtWidgets import QWidget, QMainWindow, QDialog
 
 from ..titlebar import TitleBar
 from ..utils.linux_utils import LinuxMoveResize
 from .window_effect import LinuxWindowEffect
 
 
-class LinuxFramelessWindow(QWidget):
-    """ Frameless window for Linux system """
+class LinuxFramelessWindowBase:
+    """ Frameless window base class for Linux system """
 
     BORDER_WIDTH = 5
 
-    def __init__(self, parent=None):
-        super().__init__(parent=parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def _initFrameless(self):
         self.windowEffect = LinuxWindowEffect(self)
         self.titleBar = TitleBar(self)
         self._isResizeEnabled = True
@@ -25,12 +26,11 @@ class LinuxFramelessWindow(QWidget):
         self.titleBar.raise_()
         self.resize(500, 500)
 
-    def resizeEvent(self, e):
-        super().resizeEvent(e)
-        self.titleBar.resize(self.width(), self.titleBar.height())
-
     def updateFrameless(self):
         self.setWindowFlags(self.windowFlags() | Qt.FramelessWindowHint)
+
+    def resizeEvent(self, e):
+        self.titleBar.resize(self.width(), self.titleBar.height())
 
     def setTitleBar(self, titleBar):
         """ set custom title bar
@@ -55,8 +55,8 @@ class LinuxFramelessWindow(QWidget):
         if et != QEvent.MouseButtonPress and et != QEvent.MouseMove or not self._isResizeEnabled:
             return False
 
-        edges = Qt.Edges()
-        pos = QMouseEvent(event).globalPos() - self.pos()
+        edges = Qt.Edge(0)
+        pos = event.globalPos() - self.pos()
         if pos.x() < self.BORDER_WIDTH:
             edges |= Qt.LeftEdge
         if pos.x() >= self.width()-self.BORDER_WIDTH:
@@ -82,4 +82,31 @@ class LinuxFramelessWindow(QWidget):
         elif obj in (self, self.titleBar) and et == QEvent.MouseButtonPress and edges:
             LinuxMoveResize.starSystemResize(self, event.globalPos(), edges)
 
-        return super().eventFilter(obj, event)
+        return False
+
+
+class LinuxFramelessWindow(LinuxFramelessWindowBase, QWidget):
+    """ Frameless window for Linux system """
+
+    def __init__(self, parent=None):
+        super().__init__(parent=parent)
+        self._initFrameless()
+
+
+class LinuxFramelessMainWindow(LinuxFramelessWindowBase, QMainWindow):
+    """ Frameless main window for Linux system """
+
+    def __init__(self, parent=None):
+        super().__init__(parent=parent)
+        self._initFrameless()
+
+
+class LinuxFramelessDialog(LinuxFramelessWindowBase, QDialog):
+    """ Frameless dialog for Windows system """
+
+    def __init__(self, parent=None):
+        super().__init__(parent=parent)
+        self._initFrameless()
+        self.titleBar.minBtn.hide()
+        self.titleBar.maxBtn.hide()
+        self.titleBar.setDoubleClickEnabled(False)

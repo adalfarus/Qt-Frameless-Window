@@ -1,9 +1,13 @@
 # coding:utf-8
 import sys
 
-from PyQt5.QtCore import QEvent, Qt
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QHBoxLayout, QLabel, QWidget
+from PySide6.QtCore import QPoint
+from PySide6.QtGui import QMouseEvent
+from PySide6.QtWidgets import QApplication
+
+from PySide6.QtCore import Qt, QEvent
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QLabel, QHBoxLayout, QWidget
 
 from ..utils import startSystemMove
 from .title_bar_buttons import (CloseButton, MaximizeButton, MinimizeButton,
@@ -88,7 +92,6 @@ class TitleBarBase(QWidget):
 
     def setDoubleClickEnabled(self, isEnabled):
         """ whether to switch window maximization status when double clicked
-
         Parameters
         ----------
         isEnabled: bool
@@ -99,7 +102,7 @@ class TitleBarBase(QWidget):
 
 
 class TitleBar(TitleBarBase):
-    """ Title bar with minimize, maximum and close button """
+    """ Title bar """
 
     def __init__(self, parent):
         super().__init__(parent)
@@ -141,7 +144,6 @@ class StandardTitleBar(TitleBar):
 
     def setTitle(self, title):
         """ set the title of title bar
-
         Parameters
         ----------
         title: str
@@ -152,7 +154,6 @@ class StandardTitleBar(TitleBar):
 
     def setIcon(self, icon):
         """ set the icon of title bar
-
         Parameters
         ----------
         icon: QIcon | QPixmap | str

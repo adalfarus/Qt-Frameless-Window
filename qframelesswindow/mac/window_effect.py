@@ -1,8 +1,17 @@
 # coding:utf-8
-import objc
 import Cocoa
-from PyQt5.QtWidgets import QMacCocoaViewContainer
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QWidget
+
 from ..utils.mac_utils import getNSWindow
+
+
+class QMacCocoaViewContainer(QWidget):
+
+    def __init__(self, view, parent=None):
+        super().__init__(parent=parent)
+        self.setAttribute(Qt.WA_NativeWindow)
+
 
 class MacWindowEffect:
     """ Mac OS window effect """
@@ -142,6 +151,7 @@ class MacWindowEffect:
         hWnd : int or `sip.voidptr`
             Window handle
         """
+        pass
 
     @staticmethod
     def disableMaximizeButton(hWnd):
@@ -160,3 +170,4 @@ class MacWindowEffect:
         hWnd: int or `sip.voidptr`
             Window handle
         """
+        pass

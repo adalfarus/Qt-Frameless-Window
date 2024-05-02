@@ -1,8 +1,7 @@
 # coding:utf-8
 import sys
 
-from PyQt5.QtCore import QUrl, Qt
-from PyQt5.QtWidgets import QApplication, QHBoxLayout
+from PySide6.QtWidgets import QApplication, QHBoxLayout
 
 from qframelesswindow import FramelessWindow, TitleBar, StandardTitleBar
 from qframelesswindow.webengine import FramelessWebEngineView
@@ -24,7 +23,7 @@ class Window(FramelessWindow):
         self.hBoxLayout.addWidget(self.webEngine)
 
         # load web page
-        self.webEngine.load(QUrl("https://qfluentwidgets.com/"))
+        self.webEngine.load("https://qfluentwidgets.com/")
         self.resize(1200, 800)
 
         self.titleBar.raise_()
@@ -32,12 +31,6 @@ class Window(FramelessWindow):
 
 
 if __name__ == "__main__":
-    # enable dpi scale
-    QApplication.setHighDpiScaleFactorRoundingPolicy(
-        Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
-    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
-    QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
-    
     app = QApplication(sys.argv)
     demo = Window()
     demo.show()

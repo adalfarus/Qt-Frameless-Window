@@ -144,6 +144,21 @@ class WindowsWindowEffect:
         self.accentPolicy.AccentState = ACCENT_STATE.ACCENT_DISABLED.value
         self.SetWindowCompositionAttribute(hWnd, pointer(self.winCompAttrData))
 
+    @staticmethod
+    def moveWindow(hWnd):
+        """ Move the window
+
+        Parameters
+        ----------
+        hWnd: int or `sip.voidptr`
+            Window handle
+        """
+        hWnd = int(hWnd)
+        win32gui.ReleaseCapture()
+        win32api.SendMessage(
+            hWnd, win32con.WM_SYSCOMMAND, win32con.SC_MOVE + win32con.HTCAPTION, 0
+        )
+
     def addShadowEffect(self, hWnd):
         """ Add DWM shadow to window
 

@@ -1,11 +1,11 @@
 # coding:utf-8
 import sys
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor, QPixmap, QIcon
-from PyQt5.QtWidgets import QApplication, QLabel
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QColor, QPixmap, QIcon
+from PySide6.QtWidgets import QApplication, QLabel
 
-from qframelesswindow import FramelessWindow, StandardTitleBar
+from qframelesswindow import FramelessWindow, TitleBar, StandardTitleBar
 
 
 class CustomTitleBar(StandardTitleBar):
@@ -43,7 +43,7 @@ class Window(FramelessWindow):
         self.label.setPixmap(QPixmap("screenshot/shoko.png"))
 
         self.setWindowIcon(QIcon("screenshot/logo.png"))
-        self.setWindowTitle("PyQt-Frameless-Window")
+        self.setWindowTitle("PySide6-Frameless-Window")
         self.setStyleSheet("background:white")
 
         self.titleBar.raise_()
@@ -60,14 +60,7 @@ class Window(FramelessWindow):
 
 
 if __name__ == "__main__":
-    # enable dpi scale
-    QApplication.setHighDpiScaleFactorRoundingPolicy(
-        Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
-    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
-    QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
-
-    # run app
     app = QApplication(sys.argv)
     demo = Window()
     demo.show()
-    sys.exit(app.exec_())
+    app.exec()

@@ -121,6 +121,7 @@ class LinuxWindowEffect:
         hWnd : int or `sip.voidptr`
             Window handle
         """
+        pass
 
     @staticmethod
     def disableMaximizeButton(hWnd):
@@ -139,3 +140,4 @@ class LinuxWindowEffect:
         hWnd: int or `sip.voidptr`
             Window handle
         """
+        pass
